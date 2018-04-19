@@ -3,19 +3,17 @@ import {HttpClient} from '@angular/common/http';
 import {HttpHeaders} from '@angular/common/http';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/map';
-import { ShareService } from "./share-service";
-import {Storage} from '@ionic/storage';
+/*import { ShareService } from "./share-service";*/
 @Injectable()
 export class HttpService {
 
   constructor(public httpClient : HttpClient,
-              private shareService: ShareService,
-              public storage: Storage
+             /* private shareService: ShareService,*/
              ) {
-    this.storage.get('CenterId').then((data)=>{
+    /*  this.storage.get('CenterId').then((data)=>{
       this.shareService.CENTER_ID = (data as any);
       }
-    );
+    );*/
   }
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json;application/x-www-form-urlencodeed; charset=utf-8'})
@@ -23,6 +21,7 @@ export class HttpService {
 
   httpPost(reqUrl : string, reqBody, comp, flag) {
     //后台接收数据 需要 @RequestBody 标签
+    console.info(reqBody);
     this.httpClient.post(reqUrl, reqBody, this.httpOptions)
       .subscribe(
         val => {
